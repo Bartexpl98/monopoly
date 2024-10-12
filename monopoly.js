@@ -1113,10 +1113,21 @@ function Game() {
 		document.getElementById("globalbalance").innerHTML = realMoney;
 	}
 
+	this.makePurchase = function(amount){
+		realMoney = realMoney - amount;
+		document.getElementById("globalbalance").innerHTML =  realMoney;
+	}
+
 	this.checkBalance = function(purchaseNum){
 		return purchaseNum <= realMoney
 	}
 
+	this.buyTurn = function(){
+		if (this.checkBalance(30)){
+			this.makePurchase(30);
+			roll();
+		}
+	}
 }
 
 var game;
@@ -1293,7 +1304,7 @@ function popup(HTML, action, option) {
 }
 
 function shoppopup(HTML, action, option) {
-	document.getElementById("shoptext").innerHTML = '<h1>Ingame Shop</h1>£10 <input type="button" id="purchase10" value="Purchase" onclick="game.purchaseMoney(10);" title="" /><br><br>£20 <input type="button" id="purchase20" value="Purchase" onclick="game.purchaseMoney(20);" title="" /><br><br>£30 <input type="button" id="purchase50" value="Purchase" onclick="game.purchaseMoney(50);" title="" /><br><br>';
+	document.getElementById("shoptext").innerHTML = '<h1>Ingame Shop</h1>£10 <input type="button" id="purchase10" value="Purchase" onclick="game.purchaseMoney(10);" title="" /><br><br>£20 <input type="button" id="purchase20" value="Purchase" onclick="game.purchaseMoney(20);" title="" /><br><br>£50 <input type="button" id="purchase50" value="Purchase" onclick="game.purchaseMoney(50);" title="" /><br><br>';
 	document.getElementById("shoppopup").style.width = "300px";
 	document.getElementById("shoppopup").style.top = "0px";
 	document.getElementById("shoppopup").style.left = "0px";
@@ -1315,10 +1326,20 @@ function shoppopup(HTML, action, option) {
 			$("#popupbackground").fadeOut(400);
 		}).on("click", action);
 
+		paymentHTML = '<h1>Payment Information</h1>Name<br><input type="text" name="Name"><br><br>Card Number<br><input type="number" name="Card Number" placeholder="xxxx xxxx xxxx xxxx"><br><br>Exp Date<br><input type="text" name="Exp Date" placeholder="mm/yy"><br><br>Security Number<br><input type="number" name="CSV" placeholder="xxxx">'
+
 		$("#purchase10").on("click",function(){
-			popup('<h1>Payment Information</h1>Name<br><input type="text" name="Name"><br><br>Card Number<br><input type="number" name="Card Number" placeholder="xxxx xxxx xxxx xxxx"><br><br>Exp Date<br><input type="text" name="Exp Date" placeholder="mm/yy"><br><br>Security Number<br><input type="number" name="CSV" placeholder="xxxx">')
+			popup(paymentHTML)
 			$("#shopwrap").hide();
 		})
+		$("#purchase20").on("click",function(){
+			popup(paymentHTML)
+			$("#shopwrap").hide();
+		})
+		//$("#purchase50").on("click",function(){
+		//	popup(paymentHTML)
+		//	$("#shopwrap").hide();
+		//})
 
 	// Show using animation.
 	$("#popupbackground").fadeIn(400, function() {
@@ -2470,10 +2491,12 @@ function roll() {
 	$("#buy").show();
 	$("#manage").hide();
 	$("#shop").hide();
+	$('#additionalturn').hide();
 
 	if (p.human) {
 		document.getElementById("nextbutton").focus();
 	}
+	
 	document.getElementById("nextbutton").value = "End turn";
 	document.getElementById("nextbutton").title = "End turn and advance to the next player.";
 
@@ -2513,6 +2536,7 @@ function roll() {
 			return;
 		}
 	} else {
+		$('#additionalturn').show();
 		document.getElementById("nextbutton").value = "End turn";
 		document.getElementById("nextbutton").title = "End turn and advance to the next player.";
 		doublecount = 0;
@@ -2810,6 +2834,7 @@ window.onload = function() {
 
 	$("#nextbutton").click(game.next);
 	$("#noscript").hide();
+	$('#additionalturn').hide();
 	$("#setup, #noF5").show();
 
 	var enlargeWrap = document.body.appendChild(document.createElement("div"));

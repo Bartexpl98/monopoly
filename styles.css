@@ -332,6 +332,10 @@ td {
 	overflow-x: auto;
 }
 
+#additionalturn {
+	background-color: #42c930;
+}
+
 /* #popupclose {
 	display: none;
 	position: absolute;
