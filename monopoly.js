@@ -2609,6 +2609,8 @@ function roll() {
 }
 
 function play() {
+	$('#additionalturn').hide();
+
 	if (game.auction()) {
 		return;
 	}
