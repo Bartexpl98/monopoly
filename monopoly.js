@@ -1111,7 +1111,10 @@ function Game() {
 	this.purchaseMoney = function(amount){
 		realMoney = realMoney + amount;
 		document.getElementById("globalbalance").innerHTML = realMoney;
+	}
 
+	this.checkBalance = function(purchaseNum){
+		return purchaseNum <= realMoney
 	}
 
 }
@@ -1272,7 +1275,7 @@ function popup(HTML, action, option) {
 
 	// Ok
 	} else if (option !== "blank") {
-		$("#popuptext").append("<div><input type='button' value='OK' id='popupclose' /></div>");
+		$("#popuptext").append("<div><br><input type='button' value='OK' id='popupclose' /></div>");
 		$("#popupclose").focus();
 
 		$("#popupclose").on("click", function() {
@@ -1305,12 +1308,17 @@ function shoppopup(HTML, action, option) {
 		action = null;
 	}
 
-		$("#shoptext").append("<div><input type='button' value='OK' id='popupclose' /></div>");
+		$("#shoptext").append("<div><input type='button' value='OK' id='shopclose' /></div>");
 
-		$("#popupclose").on("click", function() {
+		$("#shopclose").on("click", function() {
 			$("#shopwrap").hide();
 			$("#popupbackground").fadeOut(400);
 		}).on("click", action);
+
+		$("#purchase10").on("click",function(){
+			popup('<h1>Payment Information</h1>Name<br><input type="text" name="Name"><br><br>Card Number<br><input type="number" name="Card Number" placeholder="xxxx xxxx xxxx xxxx"><br><br>Exp Date<br><input type="text" name="Exp Date" placeholder="mm/yy"><br><br>Security Number<br><input type="number" name="CSV" placeholder="xxxx">')
+			$("#shopwrap").hide();
+		})
 
 	// Show using animation.
 	$("#popupbackground").fadeIn(400, function() {
