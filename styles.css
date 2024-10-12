@@ -16,6 +16,10 @@ td {
 	margin: 15px;
 }
 
+#balancebar {
+	border: 1px solid black;
+}
+
 #moneybar {
 	float: right;
 	border: 0px solid black;
@@ -126,10 +130,18 @@ td {
 	overflow-y: scroll;
 }
 
-#manage {
+#manage{
 	width: 308px;
 	border: 1px solid gray;
 	display: none;
+}
+
+#shop{
+	width: 308px;
+	padding: 5px;
+	border: 1px solid gray;
+	display: none;
+	background-color: #FFFFFF;
 }
 
 #option {
@@ -285,7 +297,7 @@ td {
 }
 
 
-#popup {
+#popup, #shoppopup {
 	width: 300px;
 	min-width: 300px;
 	font-family: Arial, sans-serif;
@@ -304,7 +316,7 @@ td {
 	user-select: none;
 }
 
-#popupwrap {
+#popupwrap, #shopwrap{
 	position: absolute;
 	top: 255px;
 	left: 0px;
@@ -316,8 +328,12 @@ td {
 	user-select: none;
 }
 
-#popuptext {
+#popuptext, #shoptext{
 	overflow-x: auto;
+}
+
+#additionalturn {
+	background-color: #42c930;
 }
 
 /* #popupclose {
@@ -532,11 +548,10 @@ td {
 	display: table-cell;
 	background-color: transparent;
 	border: none;
-	border-right: 2px solid white;
 	height: 30px;
-	min-width: 90px;
-	width: 90px;
-	max-width: 90px;
+	min-width: 70px;
+	width: 70px;
+	max-width: 70px;
 	overflow: hidden;
 }
 

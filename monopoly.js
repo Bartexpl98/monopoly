@@ -9,6 +9,8 @@ function Game() {
 	var currentbidder = 1;
 	var auctionproperty;
 
+	var realMoney = 0;
+
 	this.rollDice = function() {
 		die1 = Math.floor(Math.random() * 6) + 1;
 		die2 = Math.floor(Math.random() * 6) + 1;
@@ -1102,6 +1104,32 @@ function Game() {
 		}
 	};
 
+	this.openInGameShop = function() {
+		shoppopup("<h1>Ingame Shop")
+	}
+
+	this.purchaseMoney = function(amount){
+		realMoney = realMoney + amount;
+		document.getElementById("globalbalance").innerHTML = realMoney;
+	}
+
+	this.makePurchase = function(amount){
+		if (amount <= realMoney){
+			realMoney = realMoney - amount;
+			document.getElementById("globalbalance").innerHTML =  realMoney;
+			return true;
+		} else {
+			popup("Balance Too Low. Top up in the Shop!");
+			return false;
+		}
+
+	}
+
+	this.buyTurn = function(){
+		if (this.makePurchase(30)){
+			roll();
+		}
+	}
 }
 
 var game;
@@ -1260,7 +1288,7 @@ function popup(HTML, action, option) {
 
 	// Ok
 	} else if (option !== "blank") {
-		$("#popuptext").append("<div><input type='button' value='OK' id='popupclose' /></div>");
+		$("#popuptext").append("<div><br><input type='button' value='OK' id='popupclose' /></div>");
 		$("#popupclose").focus();
 
 		$("#popupclose").on("click", function() {
@@ -1272,11 +1300,55 @@ function popup(HTML, action, option) {
 
 	// Show using animation.
 	$("#popupbackground").fadeIn(400, function() {
-		$("#popupwrap").show();
+		$("#popupwrap").show(); //sometimes
 	});
 
 }
 
+function shoppopup(HTML, action, option) {
+	document.getElementById("shoptext").innerHTML = '<h1>Ingame Shop</h1>£10 <input type="button" id="purchase10" value="Purchase" onclick="game.purchaseMoney(10);" title="" /><br><br>£20 <input type="button" id="purchase20" value="Purchase" onclick="game.purchaseMoney(20);" title="" /><br><br>£50 <input type="button" id="purchase50" value="Purchase" onclick="game.purchaseMoney(50);" title="" /><br><br>';
+	document.getElementById("shoppopup").style.width = "300px";
+	document.getElementById("shoppopup").style.top = "0px";
+	document.getElementById("shoppopup").style.left = "0px";
+
+	if (!option && typeof action === "string") {
+		option = action;
+	}
+
+	option = option ? option.toLowerCase() : "";
+
+	if (typeof action !== "function") {
+		action = null;
+	}
+
+		$("#shoptext").append("<div><input type='button' value='OK' id='shopclose' /></div>");
+
+		$("#shopclose").on("click", function() {
+			$("#shopwrap").hide();
+			$("#popupbackground").fadeOut(400);
+		}).on("click", action);
+
+		paymentHTML = '<h1>Payment Information</h1>Name<br><input type="text" name="Name"><br><br>Card Number<br><input type="number" name="Card Number" placeholder="xxxx xxxx xxxx xxxx"><br><br>Exp Date<br><input type="text" name="Exp Date" placeholder="mm/yy"><br><br>Security Number<br><input type="number" name="CSV" placeholder="xxxx">'
+
+		$("#purchase10").on("click",function(){
+			popup(paymentHTML)
+			$("#shopwrap").hide();
+		})
+		$("#purchase20").on("click",function(){
+			popup(paymentHTML)
+			$("#shopwrap").hide();
+		})
+		//$("#purchase50").on("click",function(){
+		//	popup(paymentHTML)
+		//	$("#shopwrap").hide();
+		//})
+
+	// Show using animation.
+	$("#popupbackground").fadeIn(400, function() {
+		$("#shopwrap").show();
+	});
+
+}
 
 function updatePosition() {
 	// Reset borders
@@ -2420,10 +2492,13 @@ function roll() {
 	$("#option").hide();
 	$("#buy").show();
 	$("#manage").hide();
+	$("#shop").hide();
+	$('#additionalturn').hide();
 
 	if (p.human) {
 		document.getElementById("nextbutton").focus();
 	}
+	
 	document.getElementById("nextbutton").value = "End turn";
 	document.getElementById("nextbutton").title = "End turn and advance to the next player.";
 
@@ -2463,6 +2538,7 @@ function roll() {
 			return;
 		}
 	} else {
+		$('#additionalturn').show();
 		document.getElementById("nextbutton").value = "End turn";
 		document.getElementById("nextbutton").title = "End turn and advance to the next player.";
 		doublecount = 0;
@@ -2760,6 +2836,7 @@ window.onload = function() {
 
 	$("#nextbutton").click(game.next);
 	$("#noscript").hide();
+	$('#additionalturn').hide();
 	$("#setup, #noF5").show();
 
 	var enlargeWrap = document.body.appendChild(document.createElement("div"));
@@ -2994,15 +3071,22 @@ window.onload = function() {
 	$("#buy-menu-item").click(function() {
 		$("#buy").show();
 		$("#manage").hide();
+		$("#shop").hide();
 
 		// Scroll alerts to bottom.
 		$("#alert").scrollTop($("#alert").prop("scrollHeight"));
 	});
 
+	$("#money-menu-item").click(function() {
+		$("#manage").hide();
+		$("#buy").hide();
+		$("#shop").show();
+	});
 
 	$("#manage-menu-item").click(function() {
 		$("#manage").show();
 		$("#buy").hide();
+		$("#shop").hide();
 	});
 
 
