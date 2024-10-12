@@ -1114,17 +1114,19 @@ function Game() {
 	}
 
 	this.makePurchase = function(amount){
-		realMoney = realMoney - amount;
-		document.getElementById("globalbalance").innerHTML =  realMoney;
-	}
+		if (amount <= realMoney){
+			realMoney = realMoney - amount;
+			document.getElementById("globalbalance").innerHTML =  realMoney;
+			return true;
+		} else {
+			popup("Balance Too Low. Top up in the Shop!");
+			return false;
+		}
 
-	this.checkBalance = function(purchaseNum){
-		return purchaseNum <= realMoney
 	}
 
 	this.buyTurn = function(){
-		if (this.checkBalance(30)){
-			this.makePurchase(30);
+		if (this.makePurchase(30)){
 			roll();
 		}
 	}
