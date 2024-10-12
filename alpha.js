@@ -115,21 +115,21 @@ var communityChestCards = [];
 var chanceCards = [];
 
 communityChestCards[0] = new Card("Get out of Jail, Free. This card may be kept until needed or sold.", function() { p.communityChestJailCard = true; updateOwned();});
-communityChestCards[1] = new Card("You have won lifetime home delivery of the New York Times. Collect $10", function() { addamount(10, 'Community Chest');});
-communityChestCards[2] = new Card("From sale of Macy's stock, you get $45", function() { addamount(45, 'Community Chest');});
-communityChestCards[3] = new Card("Life insurance matures. Collect $100", function() { addamount(100, 'Community Chest');});
-communityChestCards[4] = new Card("Deloitte & Touche LLP tax return Collect $20", function() { addamount(20, 'Community Chest');});
-communityChestCards[5] = new Card("FAO Schwarz Xmas fund matures. Collect $100", function() { addamount(100, 'Community Chest');});
-communityChestCards[6] = new Card("You have won a United Airlines trip around the world! Collect $100", function() { addamount(100, 'Community Chest');});
-communityChestCards[7] = new Card("Performed a wedding at the Plaza Hotel. Receive $25", function() { addamount(25, 'Community Chest');});
-communityChestCards[8] = new Card("Pay hospital $100", function() { subtractamount(100, 'Community Chest');});
-communityChestCards[9] = new Card("You won the Lottery! Collect $200", function() { addamount(200, 'Community Chest');});
-communityChestCards[10] = new Card("Pay school tax of $150", function() { subtractamount(150, 'Community Chest');});
-communityChestCards[11] = new Card("Doctor's fee. Pay $50", function() { subtractamount(50, 'Community Chest');});
-communityChestCards[12] = new Card("Madison Square Garden opening tonight. Collect $50 from every player for opening night seats.", function() { collectfromeachplayer(50, 'Community Chest');});
-communityChestCards[13] = new Card("You have won kiss cash! Advance to GO (Collect $200)", function() { advance(0);});
-communityChestCards[14] = new Card("You are assessed for street repairs. $40 per house. $115 per hotel.", function() { streetrepairs(40, 115);});
-communityChestCards[15] = new Card("Go to Jail. Go directly to Jail. Do not pass GO. Do not collect $200.", function() { gotojail();});
+communityChestCards[1] = new Card("You have won lifetime home delivery of Fortnite Battlepasses. Collect $10", function() { addamount(10, 'Community Chest');});
+communityChestCards[2] = new Card("From sale of Wendy's stock, you get $45", function() { addamount(45, 'Community Chest');});
+communityChestCards[3] = new Card("A gift from your Sigma Uncle. Collect $100", function() { addamount(100, 'Community Chest');});
+communityChestCards[4] = new Card("Fanum Tax returned. Collect $20", function() { addamount(20, 'Community Chest');});
+communityChestCards[5] = new Card("Morbius saw you're struggling. Collect $100", function() { addamount(100, 'Community Chest');});
+communityChestCards[6] = new Card("You have won a trip all around this bussin world from Impostor Airlines! Collect $100", function() { addamount(100, 'Community Chest');});
+communityChestCards[7] = new Card("Performed a mewing ritual at the Mewing Avenue. Receive $25", function() { addamount(25, 'Community Chest');});
+communityChestCards[8] = new Card("You have been betrayed by the sussy impostor. Pay $100", function() { subtractamount(100, 'Community Chest');});
+communityChestCards[9] = new Card("You gambled and won! Collect $200", function() { addamount(200, 'Community Chest');});
+communityChestCards[10] = new Card("Pay school tax of $150. JK, it's fanum tax", function() { subtractamount(150, 'Community Chest');});
+communityChestCards[11] = new Card("You bought whoopers whoopers big mac whoopers for the whole gang. Pay $50", function() { subtractamount(50, 'Community Chest');});
+communityChestCards[12] = new Card("You bought a timeslot at the Tomato Town FM to play songs from your new album, Sigma Sirens. Collect $50 from every player for opening night seats.", function() { collectfromeachplayer(50, 'Community Chest');});
+communityChestCards[13] = new Card("The gambling is paying off!! Advance to GO (Collect $200)", function() { advance(0);});
+communityChestCards[14] = new Card("Kai Cenat and IShowSpeed have partied at your properties and they need repairs. $40 per house. $115 per hotel.", function() { streetrepairs(40, 115);});
+communityChestCards[15] = new Card("Go to Jail. BONK! Go directly to Jail. Do not pass GO. Do not collect $200.", function() { gotojail();});
 
 
 chanceCards[0] = new Card("Get out of Jail free. This card may be kept until needed or sold.", function() { p.chanceJailCard=true; updateOwned();});
