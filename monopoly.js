@@ -2486,6 +2486,11 @@ function land(increasedRent) {
 	}
 }
 
+function newRoll(){
+	var p = player[turn]
+	
+}
+
 function roll() {
 	var p = player[turn];
 
