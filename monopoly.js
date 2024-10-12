@@ -1,4 +1,5 @@
 function Game() {
+
 	var die1;
 	var die2;
 	var areDiceRolled = false;
@@ -11,9 +12,12 @@ function Game() {
 
 	var realMoney = 0;
 
+
 	this.rollDice = function() {
-		die1 = Math.floor(Math.random() * 6) + 1;
-		die2 = Math.floor(Math.random() * 6) + 1;
+		$("#spinningWheel").show()
+		$("#popupbackground").fadeIn(400, function() {
+			//$("#shopwrap").show();
+		})
 		areDiceRolled = true;
 	};
 
@@ -1129,6 +1133,14 @@ function Game() {
 		if (this.makePurchase(30)){
 			roll();
 		}
+	}
+
+	this.submitSpin = function(){
+		$("#spinningWheel").hide();
+		$("#valueOptions").hide();
+		$("#popupbackground").fadeOut(400);
+
+		//Erin add code here :)
 	}
 }
 
@@ -2507,18 +2519,22 @@ function roll() {
 	document.getElementById("nextbutton").value = "End turn";
 	document.getElementById("nextbutton").title = "End turn and advance to the next player.";
 
+	//dont need to roll dice
 	game.rollDice();
 	var die1 = game.getDie(1);
 	var die2 = game.getDie(2);
 
+	//counts doubles
 	doublecount++;
 
+	//saying what dice are - get rid
 	if (die1 == die2) {
 		addAlert(p.name + " spun " + (die1 + die2) + " - doubles.");
 	} else {
 		addAlert(p.name + " spun " + (die1 + die2) + ".");
 	}
 
+	//get rid - doubles jail
 	if (die1 == die2 && !p.jail) {
 		updateDice(die1, die2);
 
@@ -2543,16 +2559,19 @@ function roll() {
 			return;
 		}
 	} else {
+		//this is all needed
 		$('#additionalturn').show();
 		document.getElementById("nextbutton").value = "End turn";
 		document.getElementById("nextbutton").title = "End turn and advance to the next player.";
 		doublecount = 0;
 	}
 
+	//keep!
 	updatePosition();
 	updateMoney();
 	updateOwned();
 
+	//only pay to get out of jail
 	if (p.jail === true) {
 		p.jailroll++;
 
@@ -2573,9 +2592,11 @@ function roll() {
 		} else {
 			if (p.jailroll === 3) {
 
+				//code to get out of jail by paying
 				if (p.human) {
 					popup("<p>You must pay the $50 fine.</p>", function() {
 						payfifty();
+						//change this tho!
 						player[turn].position=10 + die1 + die2;
 						land();
 					});
@@ -2584,10 +2605,12 @@ function roll() {
 					p.position = 10 + die1 + die2;
 					land();
 				}
+				//when they go to jail
 			} else {
 				$("#landed").show();
 				document.getElementById("landed").innerHTML = "You are in jail.";
 
+				//keep this probs
 				if (!p.human) {
 					popup(p.AI.alertList, game.next);
 					p.AI.alertList = "";
@@ -2597,11 +2620,15 @@ function roll() {
 
 
 	} else {
+		//this is call to spinner??
 		updateDice(die1, die2);
 
-		// Move player
+		// Move player -calm
 		p.position += die1 + die2;
+		b = spinnerFunc();
+		console.log(b);
 
+		// change this so that its only 40
 		// Collect $200 salary as you pass GO
 		if (p.position >= 40) {
 			p.position -= 40;
@@ -2609,6 +2636,7 @@ function roll() {
 			addAlert(p.name + " collected a $200 salary for passing GO.");
 		}
 
+		//keep
 		land();
 	}
 }
@@ -2626,6 +2654,7 @@ function play() {
 	}
 
 	var p = player[turn];
+	//no longer needed
 	game.resetDice();
 
 	document.getElementById("pname").innerHTML = p.name;
@@ -2844,6 +2873,8 @@ window.onload = function() {
 	$("#nextbutton").click(game.next);
 	$("#noscript").hide();
 	$('#additionalturn').hide();
+	$("#spinningWheel").hide()
+	$("#valueOptions").hide()
 	$("#setup, #noF5").show();
 
 	var enlargeWrap = document.body.appendChild(document.createElement("div"));
@@ -3101,3 +3132,9 @@ window.onload = function() {
 
 
 };
+
+
+//Start spinning
+//spinBtn.addEventListener("click", spinnerFunc);
+
+

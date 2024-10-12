@@ -1,6 +1,13 @@
 const wheel = document.getElementById("wheel");
 const spinBtn = document.getElementById("spinBtn");
 const finalValue = document.getElementById("final-value");
+
+const colour1 = "#B836E7"
+const colour2 = "#EE4266"
+const colour3 = "#FFD23F"
+const colour4 = "#3BCEAC"
+const colour5 = "#0EAD69"
+
 //wheel.style.display = "none";
 //Object that stores values of minimum and maximum angle for a value
 const rotationValues = [
@@ -52,47 +59,46 @@ const data = [2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4,2.4, 2.4, 2.4, 2.4, 2.4, 2.
  ];
 //background color for each piece
 var pieColors = [
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
-  "#b163da",
-  "#8b35bc",
+  colour1,
+  colour2,
+  colour3,
+  colour4,
+  colour5,
+  colour1,
+  colour2,
+  colour3,
+  colour4,
+  colour5,
+  colour1,
+  colour2,
+  colour3,
+  colour4,
+  colour5,
+  colour1,
+  colour2,
+  colour3,
+  colour4,
+  colour5,
+  colour1,
+  colour2,
+  colour3,
+  colour4,
+  colour5,
+  colour1,
+  colour2,
+  colour3,
+  colour4,
+  colour5,
+  colour1,
+  colour2,
+  colour3,
+  colour4,
+  colour5,
+  colour1,
+  colour2,
+  colour3,
+  colour4,
+  colour5,
 ];
 //Create chart
 let myChart = new Chart(wheel, {
@@ -133,14 +139,18 @@ let myChart = new Chart(wheel, {
     },
   },
 });
+
 //display value based on the randomAngle
 const valueGenerator = (angleValue) => {
   for (let i of rotationValues) {
     //if the angleValue is between min and max then display it
     if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
-      finalValue.innerHTML = `<p>Value: ${i.value}</p>`;
+      var finalValue = document.getElementById("final-value")
+      finalValue.innerHTML = `<p>Value: <span id="moveValue">${i.value}</span></p>`;
+      var spinBtn = document.getElementById("spinBtn")
+      $("#valueOptions").show()
       spinBtn.disabled = false;
-      break;
+      return i.value;
     }
   }
 };
@@ -150,33 +160,40 @@ let count = 0;
 //100 rotations for animation and last rotation for result
 let resultValue = 101;
 //Start spinning
-spinBtn.addEventListener("click", () => {
-  spinBtn.disabled = true;
-  //Empty final value
-  finalValue.innerHTML = `<p>Good Luck!</p>`;
-  //Generate random degrees to stop at
-  let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
-  //Interval for rotation animation
-  let rotationInterval = window.setInterval(() => {
-    //Set rotation for piechart
-    /*
-    Initially to make the piechart rotate faster we set resultValue to 101 so it rotates 101 degrees at a time and this reduces by 1 with every count. Eventually on last rotation we rotate by 1 degree at a time.
-    */
-    myChart.options.rotation = myChart.options.rotation + resultValue;
-    //Update chart with new value;
-    myChart.update();
-    //If rotation>360 reset it back to 0
-    if (myChart.options.rotation >= 360) {
-      count += 1;
-      resultValue -= 5;
-      myChart.options.rotation = 0;
-    } else if (count > 15 && myChart.options.rotation == randomDegree) {
-      valueGenerator(randomDegree);
-      console.log(randomDegree);
-      console.log(Math.floor(randomDegree/9));
-      clearInterval(rotationInterval);
-      count = 0;
-      resultValue = 101;
-    }
-  }, 10);
-});
+spinBtn.addEventListener("click", spinnerFunc);
+
+ function spinnerFunc () {
+  {
+    var spinBtn = document.getElementById("spinBtn")
+    spinBtn.disabled = true;
+    spinValue = 0;
+    //Empty final value
+    var finalValue = document.getElementById("final-value")
+    finalValue.innerHTML = `<p>Good Luck!</p>`;
+    //Generate random degrees to stop at
+    let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
+    //Interval for rotation animation
+    let rotationInterval = window.setInterval(() => {
+      //Set rotation for piechart
+      /*
+      Initially to make the piechart rotate faster we set resultValue to 101 so it rotates 101 degrees at a time and this reduces by 1 with every count. Eventually on last rotation we rotate by 1 degree at a time.
+      */
+      myChart.options.rotation = myChart.options.rotation + resultValue;
+      //Update chart with new value;
+      myChart.update();
+      //If rotation>360 reset it back to 0
+      if (myChart.options.rotation >= 360) {
+        count += 1;
+        console.log(count)
+        resultValue -= 5;
+        myChart.options.rotation = 0;
+      } else if (count > 15 && myChart.options.rotation == randomDegree) {
+        spinValue = valueGenerator(randomDegree);
+        clearInterval(rotationInterval);
+        count = 0;
+        resultValue = 101;
+        return spinValue;
+      }
+    }, 10);    
+  }
+}
