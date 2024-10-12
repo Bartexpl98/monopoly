@@ -9,11 +9,44 @@
 	<!-- Comment out the previous line and uncomment the next one to enable the New York City Edition -->
 	<!-- <script type="text/javascript" src="newyorkcityedition.js"></script> -->
 	<script type="text/javascript" src="ai.js"></script>
+
 	<script type="text/javascript" src="monopoly.js"></script>
+
+
+	
 	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<link rel="stylesheet" type="text/css" href="spinWheel.css" />
+
 </head>
 
 <body>
+
+<div id="spinningWheel">
+	<div class="Wheelwrapper">
+		<div class="Wheelcontainer">
+			<canvas id="wheel" ></canvas>
+			<img src="/images/spinner_arrow.png" alt="spinner arrow"/>
+			<button id="spinBtn" onclick="spinnerFunc()">Fidgit Spinner!</button>
+
+		</div>
+		<div id="final-value">
+			<p>Click On The Spin Button To Start</p>
+		</div>
+		<div id="valueOptions">
+			<input type="button" id="submit_value" value="Submit" onclick="game.submitSpin()" title="" />
+			<input type="button" id="respin" value="ReSpin (£10)" onclick="" title="" />
+		</div>
+	</div>
+	<!-- Chart JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+	<!-- Chart JS Plugin for displaying text over chart -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
+
+	<script src="spin.js"></script>
+
+
+</div>
+
 	<div id="shopwrap">
 		<div id="shoppopup">
 			<div style="position: relative;">
@@ -181,7 +214,7 @@
 			<td class="cell board-bottom" id="cell1"></td>
 			<td class="cell board-corner" id="cell0"></td>
 		</tr>
-	</table>
+	</table>	
 
 	<div id="moneybarwrap">
 		<div id="balancebar">
