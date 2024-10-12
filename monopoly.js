@@ -1,7 +1,6 @@
 function Game() {
-	var die1;
-	var die2;
-	var areDiceRolled = false;
+	var wheel;
+	var isWheelSpun = false;
 
 	var auctionQueue = [];
 	var highestbidder;
@@ -9,14 +8,13 @@ function Game() {
 	var currentbidder = 1;
 	var auctionproperty;
 
-	this.rollDice = function() {
-		die1 = Math.floor(Math.random() * 6) + 1;
-		die2 = Math.floor(Math.random() * 6) + 1;
-		areDiceRolled = true;
+	this.spinWheel = function() {
+		wheel = Math.floor(Math.random() * 40) + 1;
+		isWheelSpun = true;
 	};
 
-	this.resetDice = function() {
-		areDiceRolled = false;
+	this.resetWheel = function() {
+		isWheelSpun = false;
 	};
 
 	this.next = function() {
@@ -28,23 +26,16 @@ function Game() {
 			} else {
 				roll();
 			}
-		} else if (areDiceRolled && doublecount === 0) {
+		} else if (isWheelSpun && doublecount === 0) {
 			play();
 		} else {
 			roll();
 		}
 	};
 
-	this.getDie = function(die) {
-		if (die === 1) {
-
-			return die1;
-		} else {
-
-			return die2;
-		}
-
-	};
+this.getWheel = function() {
+			return wheel;
+};
 
 
 
@@ -1393,44 +1384,29 @@ function updateMoney() {
 }
 
 function updateDice() {
-	var die0 = game.getDie(1);
-	var die1 = game.getDie(2);
+	var wheel = game.getWheel();
 
-	$("#die0").show();
+	$("#wheel").show();
 	$("#die1").show();
 
 	if (document.images) {
-		var element0 = document.getElementById("die0");
-		var element1 = document.getElementById("die1");
+		var element0 = document.getElementById("wheel");
+		//var element1 = document.getElementById("die1");
 
 		element0.classList.remove("die-no-img");
-		element1.classList.remove("die-no-img");
 
-		element0.title = "Die (" + die0 + " spots)";
-		element1.title = "Die (" + die1 + " spots)";
+		element0.title = "Die (" + wheel + " spots)";
 
-		if (element0.firstChild) {
-			element0 = element0.firstChild;
-		} else {
-			element0 = element0.appendChild(document.createElement("img"));
-		}
+		element0 = element0.firstChild;
 
-		element0.src = "images/Die_" + die0 + ".png";
-		element0.alt = die0;
+		element0.src = "images/Die_" + wheel + ".png";
+		element0.alt = wheel;
 
-		if (element1.firstChild) {
-			element1 = element1.firstChild;
-		} else {
-			element1 = element1.appendChild(document.createElement("img"));
-		}
-
-		element1.src = "images/Die_" + die1 + ".png";
-		element1.alt = die0;
 	} else {
-		document.getElementById("die0").textContent = die0;
+		document.getElementById("wheel").textContent = wheel;
 		document.getElementById("die1").textContent = die1;
 
-		document.getElementById("die0").title = "Die";
+		document.getElementById("wheel").title = "Die";
 		document.getElementById("die1").title = "Die";
 	}
 }
@@ -2285,8 +2261,7 @@ function land(increasedRent) {
 	var p = player[turn];
 	var s = square[p.position];
 
-	var die1 = game.getDie(1);
-	var die2 = game.getDie(2);
+	var wheel = game.getWheel();
 
 	$("#landed").show();
 	document.getElementById("landed").innerHTML = "You landed on " + s.name + ".";
@@ -2337,16 +2312,16 @@ function land(increasedRent) {
 
 		} else if (p.position === 12) {
 			if (increasedRent || square[28].owner == s.owner) {
-				rent = (die1 + die2) * 10;
+				rent = (wheel) * 10;
 			} else {
-				rent = (die1 + die2) * 4;
+				rent = (wheel) * 4;
 			}
 
 		} else if (p.position === 28) {
 			if (increasedRent || square[12].owner == s.owner) {
-				rent = (die1 + die2) * 10;
+				rent = (wheel) * 10;
 			} else {
-				rent = (die1 + die2) * 4;
+				rent = (wheel) * 4;
 			}
 
 		} else {
@@ -2427,110 +2402,66 @@ function roll() {
 	document.getElementById("nextbutton").value = "End turn";
 	document.getElementById("nextbutton").title = "End turn and advance to the next player.";
 
-	game.rollDice();
-	var die1 = game.getDie(1);
-	var die2 = game.getDie(2);
+	game.spinWheel();
+	var wheel = game.getWheel()
 
 	doublecount++;
 
-	if (die1 == die2) {
-		addAlert(p.name + " spun " + (die1 + die2) + " - doubles.");
-	} else {
-		addAlert(p.name + " spun " + (die1 + die2) + ".");
-	}
+	//if (die1 == die2) {
+	//	addAlert(p.name + " spun " + (die1 + die2) + " - doubles.");
+//	} else {
+//		addAlert(p.name + " spun " + (die1 + die2) + ".");
+//	}
 
-	if (die1 == die2 && !p.jail) {
-		updateDice(die1, die2);
-
-		if (doublecount < 3) {
-			document.getElementById("nextbutton").value = "Spin again";
-			document.getElementById("nextbutton").title = "You threw doubles. Spin again.";
-
-		// If player rolls doubles three times in a row, send him to jail
-		} else if (doublecount === 3) {
-			p.jail = true;
-			doublecount = 0;
-			addAlert(p.name + " spun doubles three times in a row.");
-			updateMoney();
-
-
-			if (p.human) {
-				popup("You spun doubles three times in a row. Go to jail.", gotojail);
-			} else {
-				gotojail();
-			}
-
-			return;
-		}
-	} else {
-		document.getElementById("nextbutton").value = "End turn";
-		document.getElementById("nextbutton").title = "End turn and advance to the next player.";
-		doublecount = 0;
-	}
+///	if (die1 == die2 && !p.jail) {
+	//	updateDice(die1, die2);
+//
+//		if (doublecount < 3) {
+//			document.getElementById("nextbutton").value = "Spin again";
+//			document.getElementById("nextbutton").title = "You threw doubles. Spin again.";
+//
+//		// If player rolls doubles three times in a row, send him to jail
+//		} else if (doublecount === 3) {
+//			p.jail = true;
+//			doublecount = 0;
+//			addAlert(p.name + " spun doubles three times in a row.");
+//			updateMoney();
+//
+//
+///			if (p.human) {
+	//			popup("You spun doubles three times in a row. Go to jail.", gotojail);
+	//		} else {
+	//			gotojail();
+	//		}
+//
+//			return;
+//		}
+//	} else {
+///		document.getElementById("nextbutton").value = "End turn";
+	//	document.getElementById("nextbutton").title = "End turn and advance to the next player.";
+	//	doublecount = 0;
+	//}
 
 	updatePosition();
 	updateMoney();
 	updateOwned();
 
-	if (p.jail === true) {
-		p.jailroll++;
 
-		updateDice(die1, die2);
-		if (die1 == die2) {
-			document.getElementById("jail").style.border = "1px solid black";
-			document.getElementById("cell11").style.border = "2px solid " + p.color;
-			$("#landed").hide();
-
-			p.jail = false;
-			p.jailroll = 0;
-			p.position = 10 + die1 + die2;
-			doublecount = 0;
-
-			addAlert(p.name + " spun doubles to get out of jail.");
-
-			land();
-		} else {
-			if (p.jailroll === 3) {
-
-				if (p.human) {
-					popup("<p>You must pay the $50 fine.</p>", function() {
-						payfifty();
-						player[turn].position=10 + die1 + die2;
-						land();
-					});
-				} else {
-					payfifty();
-					p.position = 10 + die1 + die2;
-					land();
-				}
-			} else {
-				$("#landed").show();
-				document.getElementById("landed").innerHTML = "You are in jail.";
-
-				if (!p.human) {
-					popup(p.AI.alertList, game.next);
-					p.AI.alertList = "";
-				}
-			}
-		}
-
-
-	} else {
-		updateDice(die1, die2);
+	updateDice(wheel);
 
 		// Move player
-		p.position += die1 + die2;
+	p.position = wheel;
 
 		// Collect $200 salary as you pass GO
-		if (p.position >= 40) {
-			p.position -= 40;
-			p.money += 200;
-			addAlert(p.name + " collected a $200 salary for passing GO.");
-		}
-
-		land();
+	if (p.position >= 40) {
+		p.position -= 40;
+		p.money += 200;
+		addAlert(p.name + " collected a $200 salary for passing GO.");
 	}
+
+	land();
 }
+
 
 function play() {
 	if (game.auction()) {
@@ -2543,7 +2474,7 @@ function play() {
 	}
 
 	var p = player[turn];
-	game.resetDice();
+	game.resetWheel();
 
 	document.getElementById("pname").innerHTML = p.name;
 
@@ -2560,9 +2491,9 @@ function play() {
 		document.getElementById("nextbutton").focus();
 	}
 	document.getElementById("nextbutton").value = "Spin the Wheel";
-	document.getElementById("nextbutton").title = "Spin the dice and move your token accordingly.";
+	document.getElementById("nextbutton").title = "Spin the whell and move your token accordingly.";
 
-	$("#die0").hide();
+	$("#wheel").hide();
 	$("#die1").hide();
 
 	if (p.jail) {
@@ -3005,8 +2936,6 @@ window.onload = function() {
 		$("#buy").hide();
 	});
 
-
 	$("#trade-menu-item").click(game.trade);
-
 
 };
