@@ -1284,7 +1284,7 @@ function popup(HTML, action, option) {
 
 	// Show using animation.
 	$("#popupbackground").fadeIn(400, function() {
-		$("#popupwrap").show();
+		$("#popupwrap").show(); //sometimes
 	});
 
 }
