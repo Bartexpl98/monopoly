@@ -1169,6 +1169,7 @@ class Game {
 			popup("Balance Too Low. Top up in the Shop!");
 			return false;
 		}
+	}
 
 		this.submitSpin = function () {
 			var moveValue = parseInt(document.getElementById("moveValue").innerText);
