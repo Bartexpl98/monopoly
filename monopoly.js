@@ -1125,6 +1125,10 @@ class Game {
 			shoppopup("<h1>Ingame Shop");
 		};
 
+		this.doomScrollPopup = function(){
+			scrollPopup("<h1>Doom Scroll")
+		};
+
 		this.purchaseMoney = function (amount) {
 			realMoney = realMoney + amount;
 			document.getElementById("globalbalance").innerHTML = realMoney;
@@ -1417,6 +1421,28 @@ function popup(HTML, action, option) {
 
 }
 
+function scrollPopup(HTML){
+	document.getElementById("scrolltext").innerHTML = 'test<br><br>';
+	document.getElementById("scrollPopup").style.width = "300px";
+	document.getElementById("scrollPopup").style.top = "0px";
+	document.getElementById("scrollPopup").style.left = "0px";
+
+	$("#popupbackground").fadeIn(400, function() {
+		$("#scrollwrap").show();
+	});
+
+	action = null;
+
+
+	$("#scrolltext").append("<div><input type='button' value='OK' id='scrollclose' /></div>");
+	$("#scrolltext").append("<div style='position:relative'><img width=200 height= 100 src='images/roblox1.png'/><p>hello</p></div>");
+
+	$("#scrollclose").on("click", function() {
+		$("#scrollwrap").hide();
+		$("#popupbackground").fadeOut(400);
+	}).on("click", action);
+}
+
 function shoppopup(HTML, action, option) {
 	document.getElementById("shoptext").innerHTML = '<h1>Ingame Shop</h1>£10 <input type="button" id="purchase10" value="Purchase" onclick="game.purchaseMoney(10);" title="" /><br><br>£20 <input type="button" id="purchase20" value="Purchase" onclick="game.purchaseMoney(20);" title="" /><br><br>£50 <input type="button" id="purchase50" value="Purchase" onclick="game.purchaseMoney(50);" title="" /><br><br>';
 	document.getElementById("shoppopup").style.width = "300px";
@@ -1434,6 +1460,7 @@ function shoppopup(HTML, action, option) {
 	}
 
 		$("#shoptext").append("<div><input type='button' value='OK' id='shopclose' /></div>");
+
 
 		$("#shopclose").on("click", function() {
 			$("#shopwrap").hide();

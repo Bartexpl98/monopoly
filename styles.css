@@ -298,6 +298,24 @@ td {
 	margin-right: 2px;
 }
 
+#scrollPopup{
+	width: 300px;
+	min-width: 300px;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px;
+	text-align: center;
+	word-wrap: break-word;
+	line-height: 1.5;
+	border: 2px solid black;
+	border-radius: 10px;
+	background-color: white;
+	display: block;
+	z-index: 13;
+	margin: auto;
+	-webkit-user-select: none;
+	user-select: none;
+}
 
 #popup, #shoppopup {
 	width: 300px;
@@ -318,7 +336,7 @@ td {
 	user-select: none;
 }
 
-#popupwrap, #shopwrap{
+#popupwrap, #shopwrap, #scrollwrap{
 	position: absolute;
 	top: 255px;
 	left: 0px;
@@ -331,6 +349,10 @@ td {
 }
 
 #popuptext, #shoptext{
+	overflow-x: auto;
+}
+
+#scrolltext{
 	overflow-x: auto;
 }
 
