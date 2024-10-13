@@ -108,9 +108,14 @@ let myChart = new Chart(wheel, {
   type: "pie",
   data: {
     //Labels(values which are to be displayed on chart)
-    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-        11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
-        29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40
+    labels: ["Go", "Bussin Bus Station","Lootbox","Skibidi Street","Fortnite Thanos",
+      "Statue of Grindset", "Gamble", "Ohio Rizz Avenue", "Sigma Park", "Just Visiting",
+      "Tomato Town FM","Chad Electric Boogaloo", "Impostor Road", "The Drip Drip Times",
+      "Aura Stadium", "Simp City", "Lootbox", "Among Us Ship", "Roblox Garden",
+      "Freddy Fazbear Parking Lot", "Wendy*s", "Gamble", "Delulu Avenue", "Whooper Whooper Big Mac Whooper Restaurant",
+      "Subway Surfers Railroad", "Bitcoin Bank", "Gamestop", "Gassed up Gas", "Sussy Street",
+      "Locked IN", "Sin City Hotel", "Goat House", "Lootbox", "Morbin Time", "Chungus Airlines",
+      "Gamble", "Mewing Avenue", "Fanum Tax", "Ratio Tower"
     ],
     //Settings for dataset/pie
     datasets: [

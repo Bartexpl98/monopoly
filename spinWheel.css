@@ -27,7 +27,7 @@
   #wheel {
     max-height: inherit;
     width: inherit;
-    background-color: crimson;
+    background-image: url("images/fidgit-spinner.png");
     top: 0;
     padding: 0;
   }
@@ -63,7 +63,7 @@
     font-size: 1.5em;
     text-align: center;
     margin-top: 1.5em;
-    color: #202020;
+    color: #ffffff;
     font-weight: 500;
   }
   @media screen and (max-width: 768px) {
