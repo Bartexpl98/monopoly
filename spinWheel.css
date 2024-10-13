@@ -28,6 +28,8 @@
     max-height: inherit;
     width: inherit;
     background-image: url("images/fidgit-spinner.png");
+    background-repeat: no-repeat;
+    background-size:contain;
     top: 0;
     padding: 0;
   }
@@ -49,7 +51,7 @@
     background: radial-gradient(#fdcf3b 50%, #d88a40 85%);
     color: #c66e16;
     text-transform: uppercase;
-    font-size: 1.8em;
+    font-size: 1em;
     letter-spacing: 0.1em;
     font-weight: 600;
   }

@@ -732,6 +732,7 @@ class Game {
 		this.trade = function (tradeObj) {
 			$("#board").hide();
 			$("#control").hide();
+			$("#imgbars").hide();
 			$("#trade").show();
 			$("#proposetradebutton").show();
 			$("#canceltradebutton").show();
@@ -756,6 +757,7 @@ class Game {
 		this.cancelTrade = function () {
 			$("#board").show();
 			$("#control").show();
+			$("#imgbars").show();
 			$("#trade").hide();
 
 
@@ -878,6 +880,7 @@ class Game {
 
 			$("#board").show();
 			$("#control").show();
+			$("#imgbars").show();
 			$("#trade").hide();
 
 			if (!player[turn].human) {
@@ -999,6 +1002,7 @@ class Game {
 			if (pcount === 1) {
 				updateMoney();
 				$("#control").hide();
+				$("#imgbars").hide();
 				$("#board").hide();
 				$("#refresh").show();
 
@@ -1144,7 +1148,7 @@ class Game {
 
 		this.buyTurn = function () {
 			if (this.makePurchase(30)) {
-				this.submitSpin();
+				doSpinner();
 				//roll();
 			}
 		};
@@ -2766,7 +2770,7 @@ function play() {
 	p.pay(0, p.creditor);
 
 	$("#landed, #option, #manage").hide();
-	$("#board, #control, #moneybar, #viewstats, #buy").show();
+	$("#board, #control, #moneybar, #viewstats, #buy, #imgbars").show();
 
 	doublecount = 0;
 	if (p.human) {
