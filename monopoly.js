@@ -1454,10 +1454,10 @@ function shoppopup(HTML, action, option) {
 			popup(paymentHTML)
 			$("#shopwrap").hide();
 		})
-		//$("#purchase50").on("click",function(){
-		//	popup(paymentHTML)
-		//	$("#shopwrap").hide();
-		//})
+		$("#purchase50").on("click",function(){
+			popup(paymentHTML)
+			$("#shopwrap").hide();
+		})
 
 	// Show using animation.
 	$("#popupbackground").fadeIn(400, function() {
