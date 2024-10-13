@@ -1148,6 +1148,27 @@ class Game {
 				//roll();
 			}
 		};
+    
+    this.checkMoney = function(){
+		realMoney = Number(document.getElementById("globalbalance").innerHTML);
+	}
+
+	this.purchaseMoney = function(amount){
+		this.checkMoney()
+		realMoney = realMoney + amount;
+		document.getElementById("globalbalance").innerHTML = realMoney;
+	}
+
+	this.makePurchase = function(amount){
+		this.checkMoney()
+		if (amount <= realMoney){
+			realMoney = realMoney - amount;
+			document.getElementById("globalbalance").innerHTML =  realMoney;
+			return true;
+		} else {
+			popup("Balance Too Low. Top up in the Shop!");
+			return false;
+		}
 
 		this.submitSpin = function () {
 			var moveValue = parseInt(document.getElementById("moveValue").innerText);
