@@ -111,7 +111,7 @@ class Game {
 				return false;
 			}
 
-			index = auctionQueue.shift();
+			var index = auctionQueue.shift();
 
 			var s = square[index];
 
