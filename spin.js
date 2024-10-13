@@ -184,7 +184,7 @@ spinBtn.addEventListener("click", spinnerFunc);
       //If rotation>360 reset it back to 0
       if (myChart.options.rotation >= 360) {
         count += 1;
-        console.log(count)
+        //console.log(count)
         resultValue -= 5;
         myChart.options.rotation = 0;
       } else if (count > 15 && myChart.options.rotation == randomDegree) {
@@ -195,5 +195,23 @@ spinBtn.addEventListener("click", spinnerFunc);
         return spinValue;
       }
     }, 10);    
+  }
+}
+
+function checkRealMoney(){
+  return Number(document.getElementById("globalbalance").innerHTML);
+}
+
+function updateRealMoney(amount){
+  document.getElementById("globalbalance").innerHTML = amount;
+}
+
+function respin(){
+  var currentMoney = checkRealMoney();
+  if (currentMoney >= 10){
+    currentMoney = currentMoney - 10;
+    updateRealMoney(currentMoney)
+    $("#valueOptions").hide()
+    spinnerFunc()
   }
 }
