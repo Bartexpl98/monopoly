@@ -54,18 +54,18 @@ function citytax() {
 		buttonAonclick = 'hide("popupbackground"); hide("popupwrap"); var p=player[turn]; addalert(p.name+" paid $200 for landing on City Tax."); p.pay(200, 0);';
 		buttonBonclick = ' hide("popupbackground"); hide("popupwrap"); var p=player[turn]; var cost=p.money; for(var i=0; i<40; i++){sq=square[i]; if(sq.owner==turn) { if(sq.mortgage) { cost+=sq.price*0.5; } else { cost+=sq.price; } cost+=(sq.house*sq.houseprice); } } cost*=0.1; cost=Math.round(cost); addalert(p.name+" paid $"+cost+" for landing on City Tax."); p.pay(cost,0);';
 
-		popup("You landed on City Tax. You must pay $200 or ten percent of your total worth.<div><input type='button' value='Pay $200' onclick='" + buttonAonclick + "' /><input type='button' value='Pay 10%' onclick='" + buttonBonclick + "' /></div>", false);
+		popup("You landed on Mega Fanum Tax. You must pay $200 or ten percent of your total worth.<div><input type='button' value='Pay $200' onclick='" + buttonAonclick + "' /><input type='button' value='Pay 10%' onclick='" + buttonBonclick + "' /></div>", false);
 	} else {
-		addalert(p.name + " paid $200 for landing on City Tax.");
+		addalert(p.name + " paid $200 for landing on Mega Fanum Tax.");
 		p.pay(200, 0);
 	}
 }
 
 function luxurytax() {
-	addalert(player[turn].name + " paid $75 for landing on Luxury Tax.");
+	addalert(player[turn].name + " paid $75 for landing on Fanum Tax.");
 	player[turn].pay(75, 0);
 
-	$("landed").show().text("You landed on Luxury Tax. Pay $75.");
+	$("landed").show().text("You landed on Fanum Tax. Pay $75.");
 }
 
 var square = [];
@@ -74,7 +74,7 @@ square[0] = new Square("GO", "COLLECT $200 SALARY AS YOU PASS.", "white");
 square[1] = new Square("Bussin Bus Station", "$60", "#4B0082", 60, 3, 2, 10, 30, 90, 160, 250);
 square[2] = new Square("Lootbox", "FOLLOW INSTRUCTIONS ON TOP CARD", "white");
 square[3] = new Square("Skibidi Street", "$60", "#4B0082", 60, 3, 4, 20, 60, 180, 320, 450);
-square[4] = new Square("Fanum Tax", "PAY 10% OR $200", "white");
+square[4] = new Square("Mega Fanum Tax", "PAY 10% OR $200", "white");
 square[5] = new Square("Fortnite Thanos", "$200", "white", 200, 1);
 square[6] = new Square("Statue of Grindset", "$100", "#AACCFF", 100, 4, 6, 30, 90, 270, 400, 550);
 square[7] = new Square("Gamble", "NEW YORK LOTTERY GAMES", "white");
@@ -82,7 +82,7 @@ square[8] = new Square("Ohio Rizz Avenue", "$100", "#AACCFF", 100, 4, 6, 30, 90,
 square[9] = new Square("Sigma Park", "$120", "#AACCFF", 120, 4, 8, 40, 100, 300, 450, 600);
 square[10] = new Square("Just Visiting", "", "white");
 square[11] = new Square("Tomato Town FM", "$140", "purple", 140, 5, 10, 50, 150, 450, 625, 750);
-square[12] = new Square("Chad Electric", "$150", "white", 150, 2);
+square[12] = new Square("Chad Electric Boogaloo", "$150", "white", 150, 2);
 square[13] = new Square("Impostor Road", "$140", "purple", 140, 5, 10, 50, 150, 450, 625, 750);
 square[14] = new Square("The Drip Drip Times", "$160", "purple", 160, 5, 12, 60, 180, 500, 700, 900);
 square[15] = new Square("Aura Stadium", "$200", "white", 200, 1);
@@ -100,7 +100,7 @@ square[26] = new Square("Bitcoin Bank", "$260", "yellow", 260, 8, 22, 110, 330, 
 square[27] = new Square("Gamestop", "$260", "yellow", 260, 8, 22, 110, 330, 800, 975, 1150);
 square[28] = new Square("Gassed up Gas", "$150", "white", 150, 2);
 square[29] = new Square("Sussy Street", "$280", "yellow", 280, 8, 24, 120, 360, 850, 1025, 1200);
-square[30] = new Square("Go to Jail", "Go directly to Jail. Do not pass GO. Do not collect $200.", "white");
+square[30] = new Square("Locked IN", "Go directly to Jail. Do not pass GO. Do not collect $200.", "white");
 square[31] = new Square("Sin City Hotel", "$300", "green", 300, 9, 26, 130, 390, 900, 1100, 1275);
 square[32] = new Square("Goat House", "$300", "green", 300, 9, 26, 130, 390, 900, 1100, 1275);
 square[33] = new Square("Lootbox", "FOLLOW INSTRUCTIONS ON TOP CARD", "white");
@@ -114,7 +114,7 @@ square[39] = new Square("Ratio Tower", "$400", "blue", 400, 10, 50, 200, 600, 14
 var communityChestCards = [];
 var chanceCards = [];
 
-communityChestCards[0] = new Card("Get out of Jail, Free. This card may be kept until needed or sold.", function() { p.communityChestJailCard = true; updateOwned();});
+communityChestCards[0] = new Card("Get out of Jail, Free. Rip BONK :( This card may be kept until needed or sold.", function() { p.communityChestJailCard = true; updateOwned();});
 communityChestCards[1] = new Card("You have won lifetime home delivery of Fortnite Battlepasses. Collect $10", function() { addamount(10, 'Community Chest');});
 communityChestCards[2] = new Card("From sale of Wendy's stock, you get $45", function() { addamount(45, 'Community Chest');});
 communityChestCards[3] = new Card("A gift from your Sigma Uncle. Collect $100", function() { addamount(100, 'Community Chest');});
