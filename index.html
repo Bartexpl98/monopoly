@@ -25,7 +25,6 @@
 	<div class="Wheelwrapper">
 		<div class="Wheelcontainer">
 			<canvas id="wheel" ></canvas>
-			<img src="/images/spinner_arrow.png" alt="spinner arrow"/>
 			<button id="spinBtn" onclick="spinnerFunc()">Fidgit Spinner!</button>
 
 		</div>
@@ -82,7 +81,7 @@
 	</div>
 
 	<p id="noscript">
-		Note: This page will not function without JavaScript.
+		Loading.... Note: This page will not function without JavaScript.
 	</p>
 
 	<div id="refresh">
@@ -512,7 +511,7 @@
 
 		<div style="margin: 20px 0px;">
 			<input type="button" value="Start Game" onclick="setup();" title="Begin playing." />
-			<input type="button" value="Shop" onclick="game.openInGameShop();" title="Open the Ingame Store!" />
+			<input type="button" value="Shop" id="shopButton" onclick="game.openInGameShop();" title="Open the Ingame Store!" />
 		</div>
 
 		<div id="noF5">Note: Refreshing this page or navigating away from it may end your game without warning.</div>
@@ -590,6 +589,12 @@
 				</td>
 			</tr>
 		</table>
+	</div>
+
+	<div id="imgbars">
+		<div id="subgif"></div>
+
+		<div id="notMonMan"><img src="images/Mr.Joint_Ownership.png"></div>
 	</div>
 
 	<div id="trade">
