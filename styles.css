@@ -17,6 +17,8 @@ td {
 }
 
 #balancebar {
+	text-align: center;
+	background-color: #FFFFFF;
 	border: 1px solid black;
 }
 

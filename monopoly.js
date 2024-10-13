@@ -1112,12 +1112,18 @@ function Game() {
 		shoppopup("<h1>Ingame Shop")
 	}
 
+	this.checkMoney = function(){
+		realMoney = Number(document.getElementById("globalbalance").innerHTML);
+	}
+
 	this.purchaseMoney = function(amount){
+		this.checkMoney()
 		realMoney = realMoney + amount;
 		document.getElementById("globalbalance").innerHTML = realMoney;
 	}
 
 	this.makePurchase = function(amount){
+		this.checkMoney()
 		if (amount <= realMoney){
 			realMoney = realMoney - amount;
 			document.getElementById("globalbalance").innerHTML =  realMoney;
